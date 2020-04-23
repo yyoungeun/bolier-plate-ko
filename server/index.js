@@ -23,7 +23,7 @@ mongoose.connect(config.mongoURI, {
 
 app.get('/', (req, res) => res.send('Hello World!~~안녕'))  //root directory에 오면 hello world 출력
 
-app.post('/register', (req,res) => {
+app.post('/api/users/register', (req,res) => {
     //회원가입할 때 필요한 정보들을 client에서 가져오면
     //그것들을 데이터베이스에 넣어준다.
 
@@ -37,7 +37,7 @@ app.post('/register', (req,res) => {
     })
 })
 
-app.post('/login', (req,res) => {
+app.post('/api/users/login', (req,res) => {
 
     //요청된 이메일을 데이터베이스에서 있는지 찾는다.
     User.findOne({ email: req.body.email }, (err, user) => {
@@ -92,8 +92,8 @@ app.get('/api/users/logout', auth, (req,res) => {
             if(err) return res.json({success: false, err});
             return res.status(200).send({
                 success: true
-            })
-        }) 
+           })
+    }) 
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))  //앱 실행

@@ -56,7 +56,7 @@ userSchema.pre('save', function(next){ //user정보를 저장하기 전
 userSchema.methods.comparePassword = function(plainPassword, cb){
     //plainPassword 1234567  암호화된 비밀번호 $2b$10$N6GTUX0dQYk0ciypcL0vEOElWbdIo0smbzdv7OXymuBV0Xuexugd2
     bcrypt.compare(plainPassword, this.password, function(err, isMatch){
-        if(err) return cb(err),
+        if(err) return cb(err);
         cb(null, isMatch) //에러 없고, 비밀번호 같다.
     })
 }
@@ -80,7 +80,7 @@ userSchema.statics.findByToken = function(token, cb){
     var user = this;
 
     //user._id + '' =token
-    //토큰을 decode한다,
+    //토큰을 decode한다.(복호화)
     jwt.verify(token, 'secretToken', function(err, decoded){
         //유저 아이디를 이용해서 유저를 찾은 다음에
         //클라이언트에서 가져온 token과 db에 보관된 토큰이 일치하는지 확인
