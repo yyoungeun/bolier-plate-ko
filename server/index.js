@@ -1,6 +1,6 @@
 const express = require('express') //express module
 const app = express() //새로운 express 앱 생성
-const port = 5000 //상관없음
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const config = require('./config/key');
@@ -22,6 +22,10 @@ mongoose.connect(config.mongoURI, {
 
 
 app.get('/', (req, res) => res.send('Hello World!~~안녕'))  //root directory에 오면 hello world 출력
+
+app.get('/api/hello', (req,res) => {
+    res.send('안녕하세요~~~')
+})
 
 app.post('/api/users/register', (req,res) => {
     //회원가입할 때 필요한 정보들을 client에서 가져오면
@@ -95,5 +99,8 @@ app.get('/api/users/logout', auth, (req,res) => {
            })
     }) 
 })
+
+
+const port = 5000
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))  //앱 실행
