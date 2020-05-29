@@ -64,7 +64,7 @@ app.post('/api/users/login', (req,res) => {
             user.generateToken((err, user) => {
                 if(err) return res.status(400).send(err); //400: 에러
 
-                //토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
+                //토큰을 저장한다. 어디에? 쿠키, 로컬스토리지(쿠키에 저장)
                 res.cookie("x_auth", user.token)
                 .status(200)
                 .json({loginSuccess: true, userId: user._id })
@@ -73,6 +73,8 @@ app.post('/api/users/login', (req,res) => {
     })
 })
 
+//role 1 어드민  role 2 특정 부서 어드민
+//role 0 -> 일반유저  role  0이 아니면 관리자
 app.get('/api/users/auth', auth, (req,res) => {
 
     //여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication이 true라는 말.
