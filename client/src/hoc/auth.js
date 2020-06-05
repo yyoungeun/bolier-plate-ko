@@ -25,7 +25,7 @@ export default function (SpecificComponent, option, adminRoute = null){
 
                 //로그인 하지 않은 상태
                 if(!response.payload.isAuth){
-                    if(option){
+                    if(option){ //login페이지로 막는다.
                         props.history.push('/login')
                     }
 
@@ -34,7 +34,7 @@ export default function (SpecificComponent, option, adminRoute = null){
                     if(adminRoute && !response.payload.isAdmin){
                         props.history.push('/')
                     }else{
-                        if(option == false)
+                        if(option === false)
                         props.history.push('/') //landingpage
                     }
                 }
